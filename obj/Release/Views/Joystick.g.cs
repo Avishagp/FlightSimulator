@@ -9,6 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using FlightSimulator.Views;
 using System;
 using System.Diagnostics;
 using System.Windows;

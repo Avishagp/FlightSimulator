@@ -21,6 +21,7 @@ namespace FlightSimulator
     {
         public MainWindow()
         {
+            Aviad_main.Hello();
             InitializeComponent();
         }
     }

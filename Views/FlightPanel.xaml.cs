@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FlightSimulator.Model;
+using FlightSimulator.ViewModels;
+using FlightSimulator.Views.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,19 +26,7 @@ namespace FlightSimulator.Views
         public FlightPanel()
         {
             InitializeComponent();
+            DataContext = new FlightPanelViewModel();
         }
-
-        //private ICommand settingsCommand;
-
-        //public ICommand SettingsCommand
-        //{
-        //    //get
-        //    //{
-        //    //    if (settingsCommand == null)
-        //    //    {
-        //    //        settingsCommand = new RelayCommand();
-        //    //    }
-        //    //}
-        //}
     }
 }

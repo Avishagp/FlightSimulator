@@ -11,6 +11,6 @@
         <Button Content="Connect" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold"
                 Background="Snow"/>
         <Button Content="Settings" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold"
-                Background="Snow"/>
+                Background="Snow" Command="{Binding Path=ClickCommand}"/>
     </Grid>
 </UserControl>

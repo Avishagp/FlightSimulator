@@ -24,6 +24,7 @@ namespace FlightSimulator.Views.Windows
         public SettingsWindow()
         {
             InitializeComponent();
+            //DataContext = new SettingsWindowViewModel(WHAT MODEL?)
         }
 
     }

@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             mc:Ignorable="d" >
+    <Grid Height="500" Width="500" Background="WhiteSmoke">
+        <local:FlightBoard HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Bottom" Height="450" Width="450"
+                           Background="WhiteSmoke"/>
+        <Button Content="Connect" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold"
+                Background="Snow"/>
+        <Button Content="Settings" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold"
+                Background="Snow"/>
     </Grid>
 </UserControl>

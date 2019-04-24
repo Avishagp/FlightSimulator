@@ -134,9 +134,6 @@ namespace FlightSimulator.Views
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
-            ///!!!!!!!!!!!!!!!!!
-            /// YOU MUST CHANGE THE FUNCTION!!!!
-            ///!!!!!!!!!!!!!!
             if (!Knob.IsMouseCaptured) return;
 
             Point newPos = e.GetPosition(Base);
@@ -154,6 +151,13 @@ namespace FlightSimulator.Views
 
             if (Moved == null ||
                 (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
+            {
+                Aileron /= 124;
+                Elevator /= 124;
+                //this.viewModel.Aileron = Aileron;
+                //this.viewModel.Elevator = Elevator;
+                return;
+            }
                 return;
 
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });

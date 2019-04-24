@@ -24,5 +24,18 @@ namespace FlightSimulator.Views
         {
             InitializeComponent();
         }
+
+        //private ICommand settingsCommand;
+
+        //public ICommand SettingsCommand
+        //{
+        //    //get
+        //    //{
+        //    //    if (settingsCommand == null)
+        //    //    {
+        //    //        settingsCommand = new RelayCommand();
+        //    //    }
+        //    //}
+        //}
     }
 }

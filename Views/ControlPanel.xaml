@@ -61,15 +61,27 @@
                         </Slider.RenderTransform>
                     </Slider>
                     <Label Content="{Binding ElementName=rudderSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                           HorizontalAlignment="Left" Margin="400,417,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.353,0.115"
+                           HorizontalAlignment="Left" Margin="399,415,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.353,0.115"
                            FontWeight="Bold" FontSize="14"/>
                     <Label Content="{Binding ElementName=throttleSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
                            HorizontalAlignment="Left" Margin="59,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.353,0.115"
                            FontWeight="Bold" FontSize="14"/>
+                    <Label Content="{Binding ElementName=Joystick.Aileron, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                           HorizontalAlignment="Left" Margin="332,35,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+                    <Label Content="{Binding ElementName=Joystick.Elevator, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                           HorizontalAlignment="Left" Margin="422,95,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Autopilot" FontWeight="Bold">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="OK" HorizontalAlignment="Left" Margin="150,440,0,0" VerticalAlignment="Top" Width="50"
+                            FontSize="14" FontWeight="Bold" Background="Azure"/>
+                    <Button Content="Clear" HorizontalAlignment="Left" Margin="300,440,0,0" VerticalAlignment="Top" Width="50"
+                            FontSize="14" FontWeight="Bold" Background="Azure"/>
+                    <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="431" TextWrapping="Wrap" VerticalAlignment="Top" Width="494"
+                             Background="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Text="{Binding TextBox, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True"/>
+                </Grid>
             </TabItem>
         </TabControl>
 

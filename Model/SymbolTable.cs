@@ -11,13 +11,9 @@ namespace FlightSimulator.Model
     /// </summary>
     class SymbolTable
     {
-        // Singlton.
+
         private static SymbolTable instance;
-
-        // Thread safety.
         private static readonly object padlock = new object();
-
-        // Out data table.
         private Dictionary<String, double> symbol_table;
 
         /// <summary>

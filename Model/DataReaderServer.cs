@@ -10,10 +10,10 @@ namespace FlightSimulator.Model
 {
     class DataReaderServer
     {
-        // Singlton.
         private static DataReaderServer instance;
-
-        // Thread safety.
+        public bool stopServer { get; set; }
+        public bool isRunning { get; private set; }
+        public TcpListener current_TcpLisner { get; private set; }
         private static readonly object padlock = new object();
 
         /// <summary>
@@ -21,6 +21,8 @@ namespace FlightSimulator.Model
         /// </summary>
         private DataReaderServer()
         {
+            stopServer = false;
+            isRunning = false;
         }
 
         /// <summary>
@@ -41,11 +43,11 @@ namespace FlightSimulator.Model
             }
         }
 
-
         /// <summary>
         /// Starting the server.
+        /// Check if server isRunning before calling, if it is - stop him before via stopServer.
         /// </summary>
-        public static void StartServer(object parameters)
+        public void StartServer(object parameters)
         {
             Tuple<string, int> args = (Tuple<string, int>)parameters;
             string ip = args.Item1;
@@ -54,15 +56,17 @@ namespace FlightSimulator.Model
             string data = null;
             byte[] buffer = new byte[1024];
 
-            // Try to stablish the remote endpoint for the socket.  
-            // Local computer on port 10005.
-            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPAddress local = IPAddress.Parse("127.0.0.1");
-            IPEndPoint remoteEP = new IPEndPoint(local, 5400);
-
+            // Try to stablish the remote endpoint for the socket.
             IPEndPoint iPEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
             TcpListener tcpListener = new TcpListener(iPEndPoint);
+
+            // If server is already running 
+            if (isRunning)
+            {
+                // If connected to a diffrent EndPoint, failure.
+                throw new InvalidOperationException("Called StartServer when a diffrent server is already running.\n");
+            }
+
 
             // Create a TCP/IP  socket.
             tcpListener.Start();
@@ -73,10 +77,11 @@ namespace FlightSimulator.Model
             try
             {
                 Console.WriteLine("Connected to client.");
+                isRunning = true;
                 data = null;
-
+                current_TcpLisner = tcpListener;
                 // Start listening for connections.  
-                while (true)
+                while (!stopServer)
                 {
 
                     /* Save our read data in a string. */
@@ -101,30 +106,26 @@ namespace FlightSimulator.Model
                         /* Update map If we got new data. */
                         if (!string.IsNullOrEmpty(till_new_line))
                         {
-                            DataReaderServer.updateMap(till_new_line);
+                            UpdateMap(till_new_line);
                         }
 
                         till_new_line = string.Empty;
                     }
                 }
-                tcpListener.Stop();
+                closeServer();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
-
-            Console.WriteLine("\nPress ENTER to continue...");
-            Console.Read();
-
-
+            return;
         }
 
         /// <summary>
         /// Update the map with the client's data.
         /// </summary>
         /// <param name="str">A string sent by the client.</param>
-        private static void updateMap(string str)
+        private void UpdateMap(string str)
         {
             // Get symbol table instance.
             SymbolTable table = SymbolTable.Instance;
@@ -162,6 +163,47 @@ namespace FlightSimulator.Model
             table.setValueOf("/controls/flight/flaps", values[20]);
             table.setValueOf("/controls/engines/current-engine/throttle", values[21]);
             table.setValueOf("/engines/engine/rpm", values[22]);
+
+            /*
+            * Console.Clear();
+            * Console.WriteLine("/instrumentation/airspeed-indicator/indicated-speed-kt        => {0}", table.getValueOf("/instrumentation/airspeed-indicator/indicated-speed-kt"));
+            * Console.WriteLine("/instrumentation/altimeter/indicated-altitude-ft              => {0}", table.getValueOf("/instrumentation/altimeter/indicated-altitude-ft"));
+            * Console.WriteLine("/instrumentation/altimeter/pressure-alt-ft                    => {0}", table.getValueOf("/instrumentation/altimeter/pressure-alt-ft"));
+            * Console.WriteLine("/instrumentation/attitude-indicator/indicated-pitch-deg       => {0}", table.getValueOf("/instrumentation/attitude-indicator/indicated-pitch-deg"));
+            * Console.WriteLine("/instrumentation/attitude-indicator/indicated-roll-deg        => {0}", table.getValueOf("/instrumentation/attitude-indicator/indicated-roll-deg"));
+            * Console.WriteLine("/instrumentation/attitude-indicator/internal-pitch-deg        => {0}", table.getValueOf("/instrumentation/attitude-indicator/internal-pitch-deg"));
+            * Console.WriteLine("/instrumentation/attitude-indicator/internal-roll-deg         => {0}", table.getValueOf("/instrumentation/attitude-indicator/internal-roll-deg"));
+            * Console.WriteLine("/instrumentation/encoder/indicated-altitude-ft                => {0}", table.getValueOf("/instrumentation/encoder/indicated-altitude-ft"));
+            * Console.WriteLine("/instrumentation/encoder/pressure-alt-ft                      => {0}", table.getValueOf("/instrumentation/encoder/pressure-alt-ft"));
+            * Console.WriteLine("/instrumentation/gps/indicated-altitude-ft                    => {0}", table.getValueOf("/instrumentation/gps/indicated-altitude-ft"));
+            * Console.WriteLine("/instrumentation/gps/indicated-ground-speed-kt                => {0}", table.getValueOf("/instrumentation/gps/indicated-ground-speed-kt"));
+            * Console.WriteLine("/instrumentation/gps/indicated-vertical-speed                 => {0}", table.getValueOf("/instrumentation/gps/indicated-vertical-speed"));
+            * Console.WriteLine("/instrumentation/heading-indicator/indicated-heading-deg      => {0}", table.getValueOf("/instrumentation/heading-indicator/indicated-heading-deg"));
+            * Console.WriteLine("/instrumentation/magnetic-compass/indicated-heading-deg       => {0}", table.getValueOf("/instrumentation/magnetic-compass/indicated-heading-deg"));
+            * Console.WriteLine("/instrumentation/slip-skid-ball/indicated-slip-skid           => {0}", table.getValueOf("/instrumentation/slip-skid-ball/indicated-slip-skid"));
+            * Console.WriteLine("/instrumentation/turn-indicator/indicated-turn-rate           => {0}", table.getValueOf("/instrumentation/turn-indicator/indicated-turn-rate"));
+            * Console.WriteLine("/instrumentation/vertical-speed-indicator/indicated-speed-fpm => {0}", table.getValueOf("/instrumentation/vertical-speed-indicator/indicated-speed-fpm"));
+            * Console.WriteLine("/controls/flight/aileron                                      => {0}", table.getValueOf("/controls/flight/aileron"));
+            * Console.WriteLine("/controls/flight/elevator                                     => {0}", table.getValueOf("/controls/flight/elevator"));
+            * Console.WriteLine("/controls/flight/rudder                                       => {0}", table.getValueOf("/controls/flight/rudder"));
+            * Console.WriteLine("/controls/flight/flaps                                        => {0}", table.getValueOf("/controls/flight/flaps"));
+            * Console.WriteLine("/controls/engines/current-engine/throttle                     => {0}", table.getValueOf("/controls/engines/current-engine/throttle"));
+            * Console.WriteLine("/engines/engine/rpm                                           => {0}", table.getValueOf("/engines/engine/rpm"));
+            */
+        }
+
+        /// <summary>
+        /// Closes the connection to the client.
+        /// </summary>
+        public void closeServer()
+        {
+            if (isRunning && current_TcpLisner != null)
+            {
+                current_TcpLisner.Stop();
+                current_TcpLisner = null;
+                isRunning = false;
+                stopServer = false;
+            }
         }
     }
 }

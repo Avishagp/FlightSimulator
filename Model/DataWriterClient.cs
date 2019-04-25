@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -7,41 +8,73 @@ namespace FlightSimulator.Model
 {
     class DataWriterClient
     {
+        private static DataWriterClient instance;
         private TcpClient tcpClient;
+        public bool isConnected { get; private set; }
 
-        public DataWriterClient()
+        /// <summary>
+        /// Returns an instance of the class DataWriterClient.
+        /// </summary>
+        public static DataWriterClient Instance
         {
-            tcpClient = null;
+            get
+            {
+
+                if (instance == null)
+                {
+                    instance = new DataWriterClient();
+                }
+                return instance;
+            }
         }
 
+        private DataWriterClient()
+        {
+            tcpClient = null;
+            isConnected = false;
+        }
+
+        /// <summary>
+        /// Starts a client, connects to a server using sent ip:port.
+        /// </summary>
+        /// <param name="ip">Server IP address.</param>
+        /// <param name="port">Server port.</param>
         public void StartClient(string ip, int port)
         {
 
-            // If port or ip are unvalid abort.
-            if (!ValidateIPv4(ip) || !ValidatePort(port))
-            {
-                throw new ArgumentException("IP or port are unvalid.\n");
-            }
+            IPEndPoint iPEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
 
             // If this is not the first run, check status:
-            if (tcpClient != null)
+            if (isConnected)
             {
-                tcpClient.Close();
-                tcpClient.Dispose();
-                tcpClient = null;
+                // If we are already connected to this IP:Port, abort.
+                if (tcpClient != null && tcpClient.Client.RemoteEndPoint.Equals(iPEndPoint))
+                {
+                    return;
+                }
+                // If we are connected to a diffrent IP:Port, stop client and continue.
+                else
+                {
+                    tcpClient.Close();
+                    isConnected = false;
+                    tcpClient.Dispose();
+                    tcpClient = null;
+                }
             }
 
             // Create a TCP/IP  socket.
-            IPEndPoint iPEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
             tcpClient = new TcpClient();
             tcpClient.Connect(iPEndPoint);
+            isConnected = true;
             tcpClient.NoDelay = true;
-            Console.WriteLine("Client connected");
         }
 
+        /// <summary>
+        /// Send a string to the server.
+        /// </summary>
+        /// <param name="msg">The massage to send.</param>
         public void SendMassage(string msg)
         {
-
             if (tcpClient == null)
             {
                 throw new NullReferenceException("There isn't a connection active.\n");
@@ -58,20 +91,42 @@ namespace FlightSimulator.Model
             NetworkStream stream = tcpClient.GetStream();
             stream.Write(data, 0, data.Length);
             stream.Flush();
-
-            Console.WriteLine("Massage \"{0}\" of size {1}",
-                    msg, data.Length);
         }
 
-        public void CloseConnection()
+        /// <summary>
+        /// Send a list of massages to the sever.
+        /// </summary>
+        /// <param name="parameters">A list of strings.</param>
+        public void SendMassages(object parameters)
         {
             if (tcpClient == null)
             {
                 throw new NullReferenceException("There isn't a connection active.\n");
             }
+            IList<string> msg_list = (IList<string>)parameters;
+            if (msg_list.Count == 0)
+            {
+                throw new NullReferenceException("There isn't a massage to send.\n");
+            }
+            foreach (string msg in msg_list)
+            {
+                SendMassage(msg);
+            }
+        }
+
+        /// <summary>
+        /// Closes the connection to the server.
+        /// </summary>
+        public void CloseConnection()
+        {
+            if (tcpClient == null)
+            {
+                return;
+            }
             tcpClient.Close();
             tcpClient.Dispose();
             tcpClient = null;
+            isConnected = false;
         }
 
         private bool ValidateIPv4(string ip)

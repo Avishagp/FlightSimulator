@@ -23,5 +23,7 @@ C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\Fli
 C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\FlightSimulator.csproj.CopyComplete
 C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\FlightSimulator.exe
 C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\FlightSimulator.pdb
-C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\FlightSimulator.csprojAssemblyReference.cache
 C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\FlightSimulator.csprojAssemblyReference.cache
+C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\Views\Windows\SettingsWindow.g.cs
+C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\Views\Windows\SettingsWindow.baml

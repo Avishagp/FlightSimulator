@@ -14,7 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlightSimulator.Model;
+using FlightSimulator.Model.Interface;
 using FlightSimulator.ViewModels;
+using FlightSimulator.Views.Windows;
 using Microsoft.Research.DynamicDataDisplay;
 using Microsoft.Research.DynamicDataDisplay.DataSources;
 
@@ -48,7 +50,6 @@ namespace FlightSimulator.Views
                 planeLocations.AppendAsync(Dispatcher, p1);
             }
         }
-
     }
 
 }

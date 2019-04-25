@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:FlightSimulator"
         xmlns:Views="clr-namespace:FlightSimulator.Views" x:Class="FlightSimulator.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1000" Width="1000">
     <Grid>
-
-        <Views:FlightPanel HorizontalAlignment="Left" Height="177" Margin="276,135,0,0" VerticalAlignment="Top" Width="212"/>
-
+        <Views:FlightPanel HorizontalAlignment="Left" Margin="240,260,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\App.xaml
-5303048633
+6-38775620
 1288074171
-26969021582
+27683662187
 16146302331
-MainWindow.xaml;Views\ControlPanel.xaml;Views\FlightBoard.xaml;Views\FlightPanel.xaml;Views\Joystick.xaml;
+MainWindow.xaml;Views\ControlPanel.xaml;Views\FlightBoard.xaml;Views\FlightPanel.xaml;Views\Joystick.xaml;Views\Windows\SettingsWindow.xaml;
 
 True
 

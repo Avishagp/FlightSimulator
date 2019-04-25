@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,12 +10,12 @@ namespace FlightSimulator.Model
     /// <summary>
     /// A singlton class that holds our dictionary, updated by DataWriterServer.
     /// </summary>
-    class SymbolTable
+    class SymbolTable : ViewModels.BaseNotify
     {
 
         private static SymbolTable instance;
         private static readonly object padlock = new object();
-        private Dictionary<String, double> symbol_table;
+        private IDictionary<String, double> symbol_table;
 
         /// <summary>
         /// Private contructor.
@@ -83,12 +84,13 @@ namespace FlightSimulator.Model
                 if (symbol_table.TryGetValue(key, out temp))
                 {
                     symbol_table[key] = value;
+                    NotifyPropertyChanged(key);
                 }
                 else
                 {
                     throw new ArgumentException("Could not find key \"{0}\" in dictionary.\n", key);
                 }
-            }
+            } 
         }
 
         /// <summary>

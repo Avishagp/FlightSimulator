@@ -88,7 +88,10 @@ namespace FlightSimulator.ViewModels.Windows
         }
         private void OnCancel()
         {
-            model.ReloadSettings();
+             model.ReloadSettings();
+            NotifyPropertyChanged("FlightServerIP");
+            NotifyPropertyChanged("FlightCommandPort");
+            NotifyPropertyChanged("FlightInfoPort");
         }
         #endregion
         #endregion

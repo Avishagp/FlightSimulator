@@ -10,9 +10,10 @@ namespace FlightSimulator.Model
     /// <summary>
     /// A singlton class that holds our dictionary, updated by DataWriterServer.
     /// </summary>
-    class SymbolTable : ViewModels.BaseNotify
+    class SymbolTable
     {
-
+        public delegate void mapUpdated(string key, double value);
+        public event mapUpdated mapUpdatedEvent;
         private static SymbolTable instance;
         private static readonly object padlock = new object();
         private IDictionary<String, double> symbol_table;
@@ -84,7 +85,7 @@ namespace FlightSimulator.Model
                 if (symbol_table.TryGetValue(key, out temp))
                 {
                     symbol_table[key] = value;
-                    NotifyPropertyChanged(key);
+                    mapUpdatedEvent?.Invoke(key, value);
                 }
                 else
                 {

@@ -86,6 +86,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ApplicationSettingsModel.cs" />
+    <Compile Include="Model\AutoPilot_SendMassages_Command.cs" />
     <Compile Include="Model\CommandHandler.cs" />
     <Compile Include="Model\DataReaderServer.cs" />
     <Compile Include="Model\DataWriterClient.cs" />

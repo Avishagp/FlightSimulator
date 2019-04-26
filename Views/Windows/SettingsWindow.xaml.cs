@@ -1,7 +1,9 @@
-﻿using FlightSimulator.Model.Interface;
+﻿using FlightSimulator.Model;
+using FlightSimulator.Model.Interface;
 using FlightSimulator.ViewModels.Windows;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +26,13 @@ namespace FlightSimulator.Views.Windows
         public SettingsWindow()
         {
             InitializeComponent();
-            //DataContext = new SettingsWindowViewModel(WHAT MODEL?)
+            DataContext = new SettingsWindowViewModel(new ApplicationSettingsModel());
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
 
     }

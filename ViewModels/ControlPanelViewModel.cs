@@ -5,12 +5,44 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.ComponentModel;
+using System.Threading;
+using FlightSimulator.Model;
 
 namespace FlightSimulator.ViewModels
 {
     class ControlPanelViewModel : INotifyPropertyChanged
     {
+        private bool autoTextBoxChanged = false;
         public event PropertyChangedEventHandler PropertyChanged;
+        
+        public void SendMessagesToSim(object parameter)
+        {
+            autoTextBoxChanged = true;
+            color = "White";
+            Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
+            send_to_sim.Start(parameter);
+        }
+        public ICommand _autoPilotOKCommand;
+        public ICommand autoPilotOKCommand
+        {
+            get
+            {
+                return _autoPilotOKCommand ?? (_autoPilotOKCommand = new CommandHandler(() => SendMessagesToSim(textBox), DataWriterClient.Instance.isConnected));
+            }
+        }
+        
+        public void ClearTextBox()
+        {
+             TextBox1 = string.Empty;
+        }
+        public ICommand _autoPilotClearCommand;
+        public ICommand autoPilotClearCommand
+        {
+            get
+            {
+                return _autoPilotClearCommand ?? (_autoPilotClearCommand = new CommandHandler(() => ClearTextBox(), string.IsNullOrEmpty(TextBox1)));
+            }
+        }
 
         public void NotifyPropertyChanged(string property)
         {
@@ -18,7 +50,7 @@ namespace FlightSimulator.ViewModels
         }
         
         public string textBox;
-        public string TextBox
+        public string TextBox1
         {
             get
             {
@@ -27,8 +59,9 @@ namespace FlightSimulator.ViewModels
             set
             {
                 textBox = value;
+                color = "Salmon";
                 NotifyPropertyChanged("Color");
-                NotifyPropertyChanged("TextBox");
+                NotifyPropertyChanged("TextBox1");
             }
         }
 
@@ -37,18 +70,13 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                if (textBox == "" || TextBox == null)
-                {
-                    color = "White";
-                }
-                else
-                {
-                    color = "Salmon";
-                }
                 return color;
             }
+            set
+            {
+                color = value;
+                NotifyPropertyChanged("Color");
+            }
         }
-
-        
     }
 }

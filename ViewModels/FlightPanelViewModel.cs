@@ -21,7 +21,7 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                return _clickCommand ?? (_clickCommand = new CommandHandler(() => OnClick()));
+                return _clickCommand ?? (_clickCommand = new CommandHandler(() => OnClick(), true));
             }
         }
         private void OnClick()

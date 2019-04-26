@@ -158,7 +158,6 @@ namespace FlightSimulator.Views
                 //this.viewModel.Elevator = Elevator;
                 return;
             }
-                return;
 
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });
             _prevAileron = Aileron;

@@ -9,23 +9,21 @@
         <TabControl HorizontalAlignment="Left" Height="500" VerticalAlignment="Top" Width="500">
             <TabItem Header="Manual" FontWeight="Bold">
                 <Grid Background="#FFE5E5E5">
-                    <local:Joystick HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Joystick"/>
+                    <local:Joystick HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Joystick"
+                                    Aileron="{Binding Aileron, Mode=OneWayToSource}" Elevator="{Binding Elevator, Mode=OneWayToSource}"/>
                     <Label Content="←aileron→" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="199,30,199,411"
                            FontWeight="Bold" FontSize="16" Width="96" RenderTransformOrigin="0.34,0.14" Height="31"/>
                     <Label Content="←throttle→" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="24,224,374,217"
                            FontWeight="Bold" FontSize="16" Width="96" RenderTransformOrigin="0.34,0.14" Height="31">
                         <Label.RenderTransform>
                             <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
                                 <RotateTransform Angle="90"/>
-                                <TranslateTransform/>
                             </TransformGroup>
                         </Label.RenderTransform>
                     </Label>
                     <Label Content="←rudder→" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="199,424,199,17"
                            FontWeight="Bold" FontSize="16" Width="96" RenderTransformOrigin="0.34,0.14" Height="31"/>
-                    <Label Content="←elevator→" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="423,222,-25,219"
+                    <Label Content="←elevator→" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="416,220,-17.6,221"
                            FontWeight="Bold" FontSize="16" Width="96" RenderTransformOrigin="0.34,0.14" Height="31">
                         <Label.RenderTransform>
                             <TransformGroup>
@@ -61,15 +59,26 @@
                         </Slider.RenderTransform>
                     </Slider>
                     <Label Content="{Binding ElementName=rudderSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                           HorizontalAlignment="Left" Margin="399,415,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.353,0.115"
-                           FontWeight="Bold" FontSize="14"/>
+                           HorizontalAlignment="Left" Margin="150,440,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
                     <Label Content="{Binding ElementName=throttleSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                           HorizontalAlignment="Left" Margin="59,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.353,0.115"
-                           FontWeight="Bold" FontSize="14"/>
-                    <Label Content="{Binding ElementName=Joystick.Aileron, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                           HorizontalAlignment="Left" Margin="332,35,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
-                    <Label Content="{Binding ElementName=Joystick.Elevator, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                           HorizontalAlignment="Left" Margin="422,95,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+                           HorizontalAlignment="Left" Margin="5,100,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                        <Label.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="90"/>
+                            </TransformGroup>
+                        </Label.LayoutTransform>
+                    </Label>
+                    <Label Content="{Binding ElementName=Joystick, Path=Aileron, UpdateSourceTrigger=PropertyChanged}"
+                           HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+                    <Label Content="{Binding ElementName=Joystick, Path=Elevator, UpdateSourceTrigger=PropertyChanged}"
+                           HorizontalAlignment="Left" Margin="450,100,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold">
+                        <Label.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="90"/>
+                            </TransformGroup>
+                        </Label.LayoutTransform>
+                    </Label>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Autopilot" FontWeight="Bold">

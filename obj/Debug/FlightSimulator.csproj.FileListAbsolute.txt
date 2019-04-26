@@ -130,3 +130,5 @@ C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\bin\Debug\DynamicDataDis
 C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\ControlPanel.baml
 C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\FlightPanel.baml
 C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\Windows\SettingsWindow.baml
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\ucSpinnerDotCircle.baml
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\ucSpinnerDotCircle.g.cs

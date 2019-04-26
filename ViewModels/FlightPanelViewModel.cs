@@ -40,6 +40,8 @@ namespace FlightSimulator.ViewModels
         }
         private void PanelConnect()
         {
+            //TODO Loading screen?
+
             // Get server and client instances.
             DataWriterClient client = DataWriterClient.Instance;
             DataReaderServer server = DataReaderServer.Instance;

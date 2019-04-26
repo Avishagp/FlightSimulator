@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator.Views.Windows"
+        xmlns:pre="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
         Title="Settings" Height="230" Width="300"
         ResizeMode="NoResize">
+
     <Grid TextBlock.FontSize="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,6 +20,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
         
         <TextBlock Text="Flight Server IP:" Margin="5,10,5,10"/>
         <TextBox Grid.Column="2" Padding="3" Margin="5,10,5,10" Text="{Binding FlightServerIP}"/>

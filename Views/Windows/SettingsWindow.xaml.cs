@@ -26,7 +26,7 @@ namespace FlightSimulator.Views.Windows
         public SettingsWindow()
         {
             InitializeComponent();
-            DataContext = new SettingsWindowViewModel(new ApplicationSettingsModel());
+            DataContext = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -34,6 +34,5 @@ namespace FlightSimulator.Views.Windows
             e.Cancel = true;
             this.Hide();
         }
-
     }
 }

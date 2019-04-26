@@ -11,6 +11,7 @@ namespace FlightSimulator.Model
         private static DataWriterClient instance;
         private TcpClient tcpClient;
         public bool isConnected { get; private set; }
+        private static readonly object padlock = new object();
 
         /// <summary>
         /// Returns an instance of the class DataWriterClient.
@@ -103,14 +104,18 @@ namespace FlightSimulator.Model
             {
                 throw new NullReferenceException("There isn't a connection active.\n");
             }
-            IList<string> msg_list = (IList<string>)parameters;
-            if (msg_list.Count == 0)
+
+            lock(padlock)
             {
-                throw new NullReferenceException("There isn't a massage to send.\n");
-            }
-            foreach (string msg in msg_list)
-            {
-                SendMassage(msg);
+                IList<string> msg_list = (IList<string>)parameters;
+                if (msg_list.Count == 0)
+                {
+                    throw new NullReferenceException("There isn't a massage to send.\n");
+                }
+                foreach (string msg in msg_list)
+                {
+                    SendMassage(msg);
+                }
             }
         }
 

@@ -104,17 +104,22 @@ namespace FlightSimulator.Model
             {
                 throw new NullReferenceException("There isn't a connection active.\n");
             }
+            if (parameters == null)
+            {
+                throw new NullReferenceException("No args given to SendMassage.\n");
+            }
 
             lock(padlock)
             {
-                IList<string> msg_list = (IList<string>)parameters;
-                if (msg_list.Count == 0)
+                char[] vs = { '\r', '\n' };
+                string[] msg_list = ((string)parameters).Split(vs, StringSplitOptions.RemoveEmptyEntries);
+                if (msg_list.Length == 0)
                 {
                     throw new NullReferenceException("There isn't a massage to send.\n");
                 }
                 foreach (string msg in msg_list)
                 {
-                    SendMassage(msg);
+                    SendMassage(msg + '\r' + '\n');
                 }
             }
         }

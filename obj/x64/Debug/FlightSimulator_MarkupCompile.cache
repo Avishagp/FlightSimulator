@@ -4,17 +4,19 @@
 winexe
 C#
 .cs
-C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\
+C:\Users\aviad\Source\Repos\Avishagp\FlightSimulator\obj\x64\Debug\
 FlightSimulator
 none
 false
 DEBUG;TRACE
-C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\App.xaml
+C:\Users\aviad\Source\Repos\Avishagp\FlightSimulator\App.xaml
 6-38775620
 1288074171
 24245341520
 16836398389
+2315996610
+161370615376
 MainWindow.xaml;Views\ControlPanel.xaml;Views\FlightBoard.xaml;Views\FlightPanel.xaml;Views\Joystick.xaml;Views\Windows\SettingsWindow.xaml;
 
-False
+True
 

@@ -83,12 +83,12 @@
             </TabItem>
             <TabItem Header="Autopilot" FontWeight="Bold">
                 <Grid Background="#FFE5E5E5">
-                    <Button Content="OK" HorizontalAlignment="Left" Margin="150,440,0,0" VerticalAlignment="Top" Width="50"
+                    <Button Command="{Binding autoPilotOKCommand}" Content="OK" HorizontalAlignment="Left" Margin="150,440,0,0" VerticalAlignment="Top" Width="50"
                             FontSize="14" FontWeight="Bold" Background="Azure"/>
-                    <Button Content="Clear" HorizontalAlignment="Left" Margin="300,440,0,0" VerticalAlignment="Top" Width="50"
+                    <Button Command="{Binding autoPilotClearCommand}"  Content="Clear" HorizontalAlignment="Left" Margin="300,440,0,0" VerticalAlignment="Top" Width="50"
                             FontSize="14" FontWeight="Bold" Background="Azure"/>
-                    <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="431" TextWrapping="Wrap" VerticalAlignment="Top" Width="494"
-                             Background="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Text="{Binding TextBox, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox x:Name="TextBox1" HorizontalAlignment="Left" Height="431" TextWrapping="Wrap" VerticalAlignment="Top" Width="494" 
+                             Background="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Text="{Binding TextBox1, UpdateSourceTrigger=PropertyChanged}"
                              AcceptsReturn="True"/>
                 </Grid>
             </TabItem>

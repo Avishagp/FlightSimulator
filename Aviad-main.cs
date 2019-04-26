@@ -10,8 +10,7 @@ namespace FlightSimulator
     {
         public static void Hello()
         {
-
-            int x = 5;
+            Model.DataWriterClient.Instance.StartClient("127.0.0.1", 5402);
         }
     }
 }

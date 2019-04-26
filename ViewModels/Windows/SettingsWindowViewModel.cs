@@ -2,6 +2,7 @@
 using FlightSimulator.Model.Interface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,7 +50,7 @@ namespace FlightSimulator.ViewModels.Windows
             }
         }
 
-     
+
 
         public void SaveSettings()
         {
@@ -59,6 +60,19 @@ namespace FlightSimulator.ViewModels.Windows
         public void ReloadSettings()
         {
             model.ReloadSettings();
+        }
+
+        /// <summary>
+        /// Upon SettingsWindow cloing, cancel closing and hide instead.
+        /// Revert back to saved settings, and update View.
+        /// </summary>
+        /// <param name="sender">The SettingsWindow.</param>
+        /// <param name="e">The Cancel Event Arguments.</param>
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            ((FlightSimulator.Views.Windows.SettingsWindow)sender).Hide();
+            OnCancel();
         }
 
         #region Commands
@@ -88,7 +102,7 @@ namespace FlightSimulator.ViewModels.Windows
         }
         private void OnCancel()
         {
-             model.ReloadSettings();
+            model.ReloadSettings();
             NotifyPropertyChanged("FlightServerIP");
             NotifyPropertyChanged("FlightCommandPort");
             NotifyPropertyChanged("FlightInfoPort");

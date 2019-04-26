@@ -5,21 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator.Views.Windows"
         mc:Ignorable="d"
-        Title="Settings" Height="300" Width="300"
-         ResizeMode="NoResize">
-    <Grid>
-        <Label Content="Flight Server IP:" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="162,34,0,0" TextWrapping="Wrap"
-                 Text="{Binding FlightServerIP}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Flight Info Port:" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="162,110,0,0" TextWrapping="Wrap" 
-                 Text="{Binding FlightInfoPort, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Flight Command Port:" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="162,178,0,0" TextWrapping="Wrap" 
-                 Text="{Binding FlightCommandPort, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="75,234,0,0" VerticalAlignment="Top" Width="50" Background="WhiteSmoke"
+        Title="Settings" Height="230" Width="300"
+        ResizeMode="NoResize">
+    <Grid TextBlock.FontSize="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Text="Flight Server IP:" Margin="5,10,5,10"/>
+        <TextBox Grid.Column="2" Padding="3" Margin="5,10,5,10" Text="{Binding FlightServerIP}"/>
+
+        <TextBlock Text="Flight Info Port:" Grid.Row="1" Padding="3" Margin="5,10,5,10"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Padding="3" Margin="5,10,5,10"
+            Text="{Binding FlightInfoPort, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Flight Command Port:" Grid.Row="2" Padding="3" Margin="5,10,5,10"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Padding="3" Margin="5,10,5,10" 
+                 Text="{Binding FlightCommandPort, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Button Content="OK" FontSize="14" Grid.Row="3" Background="AntiqueWhite" Padding="5" Margin="5,10,5,10"
                 Command="{Binding ClickCommand}"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="175,234,0,0" VerticalAlignment="Top" Width="50" Background="WhiteSmoke"
+        <Button Content="Cancel" FontSize="16" Grid.Row="3" Grid.Column="2" Background="AntiqueWhite" Padding="5" Margin="5,10,5,10"
                 Command="{Binding CancelCommand}"/>
 
     </Grid>

@@ -26,13 +26,10 @@ namespace FlightSimulator.Views.Windows
         public SettingsWindow()
         {
             InitializeComponent();
-            DataContext = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Hide();
+            SettingsWindowViewModel viewModel = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
+            DataContext = viewModel;
+            // Sign the view model to Closing event.
+            Closing += viewModel.OnWindowClosing;
         }
     }
 }

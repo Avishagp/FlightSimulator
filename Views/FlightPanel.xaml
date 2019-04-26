@@ -9,8 +9,8 @@
         <local:FlightBoard HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Bottom" Height="450" Width="450"
                            Background="WhiteSmoke"/>
         <Button Content="Connect" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold"
-                Background="Snow"/>
+                Background="Snow" Command="{Binding Path=PanelConnectCommand}"/>
         <Button Content="Settings" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold"
-                Background="Snow" Command="{Binding Path=ClickCommand}"/>
+                Background="Snow" Command="{Binding Path=PanelSettingsCommand}"/>
     </Grid>
 </UserControl>

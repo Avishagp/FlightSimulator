@@ -14,6 +14,7 @@ namespace FlightSimulator.Model
         public bool stopServer { get; set; }
         public bool isRunning { get; private set; }
         public TcpListener current_TcpLisner { get; private set; }
+        private IPEndPoint clientEndPoint;
         private static readonly object padlock = new object();
 
         /// <summary>
@@ -80,6 +81,7 @@ namespace FlightSimulator.Model
                 isRunning = true;
                 data = null;
                 current_TcpLisner = tcpListener;
+                clientEndPoint = iPEndPoint;
                 // Start listening for connections.  
                 while (!stopServer)
                 {
@@ -201,9 +203,20 @@ namespace FlightSimulator.Model
             {
                 current_TcpLisner.Stop();
                 current_TcpLisner = null;
+                clientEndPoint = null;
                 isRunning = false;
                 stopServer = false;
             }
+        }
+
+        public bool isConnectedToEndPoint(string ip, int port)
+        {
+            if (clientEndPoint == null)
+            {
+                return false;
+            }
+            IPEndPoint tempEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
+            return clientEndPoint.Equals(tempEndPoint);
         }
     }
 }

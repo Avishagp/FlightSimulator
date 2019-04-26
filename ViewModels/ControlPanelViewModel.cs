@@ -14,11 +14,15 @@ namespace FlightSimulator.ViewModels
     {
         private bool autoTextBoxChanged = false;
         public event PropertyChangedEventHandler PropertyChanged;
-        
+        public void NotifyPropertyChanged(string property)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
         public void SendMessagesToSim(object parameter)
         {
             autoTextBoxChanged = true;
-            color = "White";
+            Color = "White";
             Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
             send_to_sim.Start(parameter);
         }
@@ -27,7 +31,7 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                return _autoPilotOKCommand ?? (_autoPilotOKCommand = new CommandHandler(() => SendMessagesToSim(textBox), DataWriterClient.Instance.isConnected));
+                return _autoPilotOKCommand ?? (_autoPilotOKCommand = new CommandHandler(() => SendMessagesToSim(textBox)));
             }
         }
         
@@ -40,14 +44,11 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                return _autoPilotClearCommand ?? (_autoPilotClearCommand = new CommandHandler(() => ClearTextBox(), string.IsNullOrEmpty(TextBox1)));
+                return _autoPilotClearCommand ?? (_autoPilotClearCommand = new CommandHandler(() => ClearTextBox()));
             }
         }
 
-        public void NotifyPropertyChanged(string property)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
+        
         
         public string textBox;
         public string TextBox1
@@ -70,6 +71,10 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
+                if (string.IsNullOrEmpty(textBox))
+                {
+                    return "White";
+                }
                 return color;
             }
             set

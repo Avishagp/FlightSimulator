@@ -68,7 +68,7 @@ namespace FlightSimulator.ViewModels.Windows
         {
             get
             {
-                return _clickCommand ?? (_clickCommand = new CommandHandler(() => OnClick(), true));
+                return _clickCommand ?? (_clickCommand = new CommandHandler(() => OnClick()));
             }
         }
         private void OnClick()
@@ -83,7 +83,7 @@ namespace FlightSimulator.ViewModels.Windows
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new CommandHandler(() => OnCancel(), true));
+                return _cancelCommand ?? (_cancelCommand = new CommandHandler(() => OnCancel()));
             }
         }
         private void OnCancel()

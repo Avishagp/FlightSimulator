@@ -75,7 +75,6 @@ C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\Debug\FlightS
 C:\Users\Aviad-PC\Source\Repos\Avishagp\FlightSimulator\bin\Debug\FlightSimulator.exe.config
 C:\Users\Aviad-PC\Source\Repos\Avishagp\FlightSimulator\bin\Debug\FlightSimulator.exe
 C:\Users\Aviad-PC\Source\Repos\Avishagp\FlightSimulator\bin\Debug\FlightSimulator.pdb
-C:\Users\Aviad-PC\Source\Repos\Avishagp\FlightSimulator\bin\Debug\DynamicDataDisplay.xml
 C:\Users\Aviad-PC\Source\Repos\Avishagp\FlightSimulator\obj\Debug\FlightSimulator.csprojAssemblyReference.cache
 C:\Users\Aviad-PC\Source\Repos\Avishagp\FlightSimulator\obj\Debug\Views\Joystick.baml
 C:\Users\Aviad-PC\Source\Repos\Avishagp\FlightSimulator\obj\Debug\MainWindow.g.cs
@@ -122,3 +121,12 @@ C:\Users\aviad\source\repos\Avishagp\FlightSimulator\obj\Debug\FlightSimulator.P
 C:\Users\aviad\source\repos\Avishagp\FlightSimulator\obj\Debug\FlightSimulator.csproj.GenerateResource.cache
 C:\Users\aviad\source\repos\Avishagp\FlightSimulator\obj\Debug\FlightSimulator.csproj.CoreCompileInputs.cache
 C:\Users\aviad\source\repos\Avishagp\FlightSimulator\obj\Debug\FlightSimulator.csproj.CopyComplete
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\ControlPanel.g.cs
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\FlightPanel.g.cs
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\Windows\SettingsWindow.g.cs
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\FlightSimulator_Content.g.cs
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\bin\Debug\DynamicDataDisplay.dll
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\ControlPanel.baml
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\FlightPanel.baml
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\Debug\Views\Windows\SettingsWindow.baml

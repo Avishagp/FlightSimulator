@@ -9,7 +9,7 @@ namespace FlightSimulator.Model
     class DataWriterClient
     {
         private static DataWriterClient instance;
-        private TcpClient tcpClient;
+        public TcpClient tcpClient { get; private set; }
         public bool isConnected { get; private set; }
         private static readonly object padlock = new object();
 
@@ -173,6 +173,16 @@ namespace FlightSimulator.Model
         private bool ValidatePort(int port)
         {
             return (port > 0);
+        }
+
+        public bool isConnectedToEndPoint(string ip, int port)
+        {
+            if (tcpClient == null)
+            {
+                return false;
+            }
+            IPEndPoint tempEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
+            return tcpClient.Client.RemoteEndPoint.Equals(tempEndPoint);
         }
     }
 }

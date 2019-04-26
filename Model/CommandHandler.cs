@@ -10,17 +10,15 @@ namespace FlightSimulator.Model
     public class CommandHandler : ICommand
     {
         private Action _action;
-        private bool _canExecute;
 
-        public CommandHandler(Action action, bool canExecute)
+        public CommandHandler(Action action)
         {
             _action = action;
-            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute;
+            return true;
         }
 
         public event EventHandler CanExecuteChanged;

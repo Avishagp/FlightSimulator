@@ -33,7 +33,6 @@ namespace FlightSimulator.ViewModels
             Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
             send_to_sim.Start(parameter);
         }
-
         public ICommand _autoPilotOKCommand;
         public ICommand autoPilotOKCommand
         {
@@ -95,6 +94,65 @@ namespace FlightSimulator.ViewModels
                 NotifyPropertyChanged("Color");
             }
         }
-        #endregion
+
+        public double throttle;
+        public double ThrottleVal
+        {
+            set
+            {
+                throttle = value;
+                string msg = "set " + "/controls/engines/current-engine/throttle " + throttle;
+                SendMessagesToSim(msg);
+            }
+            get
+            {
+                return throttle;
+            }
+        }
+
+        public double rudder;
+        public double RudderVal
+        {
+            set
+            {
+                rudder = value;
+                string msg = "set " + "/controls/flight/rudder " + rudder;
+                SendMessagesToSim(msg);
+            }
+            get
+            {
+                return rudder;
+            }
+        }
+
+        public double aileron;
+        public double AileronVal
+        {
+            set
+            {
+                aileron = value;
+                string msg = "set " + "/controls/flight/aileron " + aileron;
+                SendMessagesToSim(msg);
+            }
+            get
+            {
+                return aileron;
+            }
+        }
+
+        public double elevator;
+        public double ElevatorVal
+        {
+            set
+            {
+                elevator = value;
+                string msg = "set " + "/controls/flight/elevator " + elevator;
+                SendMessagesToSim(msg);
+            }
+            get
+            {
+                return elevator;
+            }
+        }
     }
 }

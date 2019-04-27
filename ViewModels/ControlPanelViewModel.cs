@@ -101,7 +101,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 throttle = value;
-                string msg = "set " + "/controls/engines/current-engine/throttle " + throttle;
+                string msg = "set " + "/controls/engines/current-engine/throttle " + throttle + "\r\n";
                 SendMessagesToSim(msg);
             }
             get
@@ -116,7 +116,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 rudder = value;
-                string msg = "set " + "/controls/flight/rudder " + rudder;
+                string msg = "set " + "/controls/flight/rudder " + rudder + "\r\n";
                 SendMessagesToSim(msg);
             }
             get
@@ -131,7 +131,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 aileron = value;
-                string msg = "set " + "/controls/flight/aileron " + aileron;
+                string msg = "set " + "/controls/flight/aileron " + aileron + "\r\n";
                 SendMessagesToSim(msg);
             }
             get
@@ -146,7 +146,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 elevator = value;
-                string msg = "set " + "/controls/flight/elevator " + elevator;
+                string msg = "set " + "/controls/flight/elevator " + elevator + "\r\n";
                 SendMessagesToSim(msg);
             }
             get

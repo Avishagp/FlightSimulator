@@ -101,14 +101,11 @@ namespace FlightSimulator.Model
         {
             get
             {
-                lock (padlock)
+                if (instance == null)
                 {
-                    if (instance == null)
-                    {
-                        instance = new SymbolTable();
-                    }
-                    return instance;
+                    instance = new SymbolTable();
                 }
+                return instance;
             }
         }
     }

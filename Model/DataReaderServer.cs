@@ -79,7 +79,6 @@ namespace FlightSimulator.Model
             // listen for incoming connections.  
             try
             {
-                Console.WriteLine("Connected to client.");
                 isRunning = true;
                 data = null;
                 current_TcpLisner = tcpListener;
@@ -178,33 +177,6 @@ namespace FlightSimulator.Model
             table.setValueOf("/controls/flight/flaps", values[22]);
             table.setValueOf("/controls/engines/current-engine/throttle", values[23]);
             table.setValueOf("/engines/engine/rpm", values[24]);
-
-            /*
-            * Console.Clear();
-            * Console.WriteLine("/instrumentation/airspeed-indicator/indicated-speed-kt        => {0}", table.getValueOf("/instrumentation/airspeed-indicator/indicated-speed-kt"));
-            * Console.WriteLine("/instrumentation/altimeter/indicated-altitude-ft              => {0}", table.getValueOf("/instrumentation/altimeter/indicated-altitude-ft"));
-            * Console.WriteLine("/instrumentation/altimeter/pressure-alt-ft                    => {0}", table.getValueOf("/instrumentation/altimeter/pressure-alt-ft"));
-            * Console.WriteLine("/instrumentation/attitude-indicator/indicated-pitch-deg       => {0}", table.getValueOf("/instrumentation/attitude-indicator/indicated-pitch-deg"));
-            * Console.WriteLine("/instrumentation/attitude-indicator/indicated-roll-deg        => {0}", table.getValueOf("/instrumentation/attitude-indicator/indicated-roll-deg"));
-            * Console.WriteLine("/instrumentation/attitude-indicator/internal-pitch-deg        => {0}", table.getValueOf("/instrumentation/attitude-indicator/internal-pitch-deg"));
-            * Console.WriteLine("/instrumentation/attitude-indicator/internal-roll-deg         => {0}", table.getValueOf("/instrumentation/attitude-indicator/internal-roll-deg"));
-            * Console.WriteLine("/instrumentation/encoder/indicated-altitude-ft                => {0}", table.getValueOf("/instrumentation/encoder/indicated-altitude-ft"));
-            * Console.WriteLine("/instrumentation/encoder/pressure-alt-ft                      => {0}", table.getValueOf("/instrumentation/encoder/pressure-alt-ft"));
-            * Console.WriteLine("/instrumentation/gps/indicated-altitude-ft                    => {0}", table.getValueOf("/instrumentation/gps/indicated-altitude-ft"));
-            * Console.WriteLine("/instrumentation/gps/indicated-ground-speed-kt                => {0}", table.getValueOf("/instrumentation/gps/indicated-ground-speed-kt"));
-            * Console.WriteLine("/instrumentation/gps/indicated-vertical-speed                 => {0}", table.getValueOf("/instrumentation/gps/indicated-vertical-speed"));
-            * Console.WriteLine("/instrumentation/heading-indicator/indicated-heading-deg      => {0}", table.getValueOf("/instrumentation/heading-indicator/indicated-heading-deg"));
-            * Console.WriteLine("/instrumentation/magnetic-compass/indicated-heading-deg       => {0}", table.getValueOf("/instrumentation/magnetic-compass/indicated-heading-deg"));
-            * Console.WriteLine("/instrumentation/slip-skid-ball/indicated-slip-skid           => {0}", table.getValueOf("/instrumentation/slip-skid-ball/indicated-slip-skid"));
-            * Console.WriteLine("/instrumentation/turn-indicator/indicated-turn-rate           => {0}", table.getValueOf("/instrumentation/turn-indicator/indicated-turn-rate"));
-            * Console.WriteLine("/instrumentation/vertical-speed-indicator/indicated-speed-fpm => {0}", table.getValueOf("/instrumentation/vertical-speed-indicator/indicated-speed-fpm"));
-            * Console.WriteLine("/controls/flight/aileron                                      => {0}", table.getValueOf("/controls/flight/aileron"));
-            * Console.WriteLine("/controls/flight/elevator                                     => {0}", table.getValueOf("/controls/flight/elevator"));
-            * Console.WriteLine("/controls/flight/rudder                                       => {0}", table.getValueOf("/controls/flight/rudder"));
-            * Console.WriteLine("/controls/flight/flaps                                        => {0}", table.getValueOf("/controls/flight/flaps"));
-            * Console.WriteLine("/controls/engines/current-engine/throttle                     => {0}", table.getValueOf("/controls/engines/current-engine/throttle"));
-            * Console.WriteLine("/engines/engine/rpm                                           => {0}", table.getValueOf("/engines/engine/rpm"));
-            */
         }
 
         /// <summary>

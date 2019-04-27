@@ -51,8 +51,6 @@ namespace FlightSimulator.ViewModels
             bool isClientConnected = client.isConnected;
             bool isServerConnected = server.isRunning;
 
-            // TODO If connected check if it's for the same IPEndPoint.
-
             #region Connect to Server
             // If already connected to this client, don't do anything.
             if (!server.isConnectedToEndPoint(FlightServerIP, flightInfoPort))
@@ -68,7 +66,7 @@ namespace FlightSimulator.ViewModels
                     }
                 }
                 Thread serverThread = new Thread(new ParameterizedThreadStart(server.StartServer));
-                //serverThread.IsBackground = true;
+                serverThread.IsBackground = true;
                 serverThread.Start(new Tuple<string, int>(FlightServerIP, flightInfoPort));
             }
 

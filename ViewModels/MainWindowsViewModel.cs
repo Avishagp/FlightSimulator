@@ -13,10 +13,10 @@ namespace FlightSimulator.ViewModels
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             // Close connections.
-            Model.DataReaderServer.Instance.stopServer = false;
+            Model.DataReaderServer.Instance.stopServer = true;
             Model.DataWriterClient.Instance.CloseConnection();
 
-            // Close settings window
+            // Close windows
             Application.Current.Shutdown();
         }
     }

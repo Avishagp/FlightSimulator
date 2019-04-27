@@ -14,9 +14,8 @@ namespace FlightSimulator.ViewModels
     class ControlPanelViewModel : BaseNotify
     {
 
-        public void SendMessagesToSim(object parameter, bool fromTextBox = false)
+        public void SendMessagesToSim(object parameter)
         {
-            autoTextBoxChanged = true;
             // If there isn't a conenction active, abort.
             if (!Model.DataWriterClient.Instance.isConnected)
             {
@@ -24,16 +23,24 @@ namespace FlightSimulator.ViewModels
                     "Warning", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 return;
             }
-            
-            if (fromTextBox)
-            {
-            	// Set color
-                Color = "White";
-            }
+
+            // Set color
+            Color = "White";
 
             // Send commands.
             Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
             send_to_sim.Start(parameter);
+        }
+
+        public void SendJoystickMessagesToSim(object parameter)
+        {
+            // If there isn't a conenction active, don't do anything.
+            if (Model.DataWriterClient.Instance.isConnected)
+            {
+                // Send commands.
+                Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
+                send_to_sim.Start(parameter);
+            }
         }
 
         public ICommand _autoPilotOKCommand;
@@ -41,7 +48,7 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                return _autoPilotOKCommand ?? (_autoPilotOKCommand = new CommandHandler(() => SendMessagesToSim(textBox, true)));
+                return _autoPilotOKCommand ?? (_autoPilotOKCommand = new CommandHandler(() => SendMessagesToSim(textBox)));
             }
         }
         
@@ -99,7 +106,7 @@ namespace FlightSimulator.ViewModels
             {
                 throttle = value;
                 string msg = "set " + "/controls/engines/current-engine/throttle " + throttle + "\r\n";
-                SendMessagesToSim(msg);
+                SendJoystickMessagesToSim(msg);
             }
             get
             {
@@ -114,7 +121,7 @@ namespace FlightSimulator.ViewModels
             {
                 rudder = value;
                 string msg = "set " + "/controls/flight/rudder " + rudder + "\r\n";
-                SendMessagesToSim(msg);
+                SendJoystickMessagesToSim(msg);
             }
             get
             {
@@ -129,7 +136,7 @@ namespace FlightSimulator.ViewModels
             {
                 aileron = value;
                 string msg = "set " + "/controls/flight/aileron " + aileron + "\r\n";
-                SendMessagesToSim(msg);
+                SendJoystickMessagesToSim(msg);
             }
             get
             {
@@ -144,7 +151,7 @@ namespace FlightSimulator.ViewModels
             {
                 elevator = value;
                 string msg = "set " + "/controls/flight/elevator " + elevator + "\r\n";
-                SendMessagesToSim(msg);
+                SendJoystickMessagesToSim(msg);
             }
             get
             {

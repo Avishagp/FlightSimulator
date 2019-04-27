@@ -13,7 +13,11 @@ namespace FlightSimulator.ViewModels
 {
     class ControlPanelViewModel : BaseNotify
     {
-
+        #region Send Command
+        /// <summary>
+        /// Sends the lines in the TextBox to the server.
+        /// </summary>
+        /// <param name="parameter">The string to send.</param>
         public void SendMessagesToSim(object parameter)
         {
             // If there isn't a conenction active, abort.
@@ -24,25 +28,11 @@ namespace FlightSimulator.ViewModels
                 return;
             }
 
-            // Set color
+            // Set color and send commands.
             Color = "White";
-
-            // Send commands.
             Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
             send_to_sim.Start(parameter);
         }
-
-        public void SendJoystickMessagesToSim(object parameter)
-        {
-            // If there isn't a conenction active, don't do anything.
-            if (Model.DataWriterClient.Instance.isConnected)
-            {
-                // Send commands.
-                Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
-                send_to_sim.Start(parameter);
-            }
-        }
-
         public ICommand _autoPilotOKCommand;
         public ICommand autoPilotOKCommand
         {
@@ -51,7 +41,9 @@ namespace FlightSimulator.ViewModels
                 return _autoPilotOKCommand ?? (_autoPilotOKCommand = new CommandHandler(() => SendMessagesToSim(textBox)));
             }
         }
-        
+        #endregion
+
+        #region Clear Command
         public void ClearTextBox()
         {
              TextBox1 = string.Empty;
@@ -64,7 +56,9 @@ namespace FlightSimulator.ViewModels
                 return _autoPilotClearCommand ?? (_autoPilotClearCommand = new CommandHandler(() => ClearTextBox()));
             }
         }
-        
+        #endregion
+
+        #region TextBox
         public string textBox;
         public string TextBox1
         {
@@ -80,7 +74,9 @@ namespace FlightSimulator.ViewModels
                 NotifyPropertyChanged("TextBox1");
             }
         }
+        #endregion
 
+        #region Color
         public string color;
         public string Color
         {
@@ -106,7 +102,7 @@ namespace FlightSimulator.ViewModels
             {
                 throttle = value;
                 string msg = "set " + "/controls/engines/current-engine/throttle " + throttle + "\r\n";
-                SendJoystickMessagesToSim(msg);
+                SendMessagesToSim(msg);
             }
             get
             {
@@ -121,7 +117,7 @@ namespace FlightSimulator.ViewModels
             {
                 rudder = value;
                 string msg = "set " + "/controls/flight/rudder " + rudder + "\r\n";
-                SendJoystickMessagesToSim(msg);
+                SendMessagesToSim(msg);
             }
             get
             {
@@ -136,7 +132,7 @@ namespace FlightSimulator.ViewModels
             {
                 aileron = value;
                 string msg = "set " + "/controls/flight/aileron " + aileron + "\r\n";
-                SendJoystickMessagesToSim(msg);
+                SendMessagesToSim(msg);
             }
             get
             {
@@ -151,7 +147,7 @@ namespace FlightSimulator.ViewModels
             {
                 elevator = value;
                 string msg = "set " + "/controls/flight/elevator " + elevator + "\r\n";
-                SendJoystickMessagesToSim(msg);
+                SendMessagesToSim(msg);
             }
             get
             {

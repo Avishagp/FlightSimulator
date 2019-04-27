@@ -33,6 +33,17 @@ namespace FlightSimulator.ViewModels
             Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
             send_to_sim.Start(parameter);
         }
+
+        public void SendJoystickMessagesToSim(object parameter)
+        {
+            // If there isn't a conenction active, do nothing.
+            if (Model.DataWriterClient.Instance.isConnected)
+            {
+                Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
+                send_to_sim.Start(parameter);
+            }
+        }
+
         public ICommand _autoPilotOKCommand;
         public ICommand autoPilotOKCommand
         {
@@ -96,6 +107,7 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
 
+        #region JoystickProperties
         public double throttle;
         public double ThrottleVal
         {
@@ -103,7 +115,7 @@ namespace FlightSimulator.ViewModels
             {
                 throttle = value;
                 string msg = "set " + "/controls/engines/current-engine/throttle " + throttle + "\r\n";
-                SendMessagesToSim(msg);
+                SendJoystickMessagesToSim(msg);
             }
             get
             {
@@ -118,7 +130,7 @@ namespace FlightSimulator.ViewModels
             {
                 rudder = value;
                 string msg = "set " + "/controls/flight/rudder " + rudder + "\r\n";
-                SendMessagesToSim(msg);
+                SendJoystickMessagesToSim(msg);
             }
             get
             {
@@ -133,7 +145,7 @@ namespace FlightSimulator.ViewModels
             {
                 aileron = value;
                 string msg = "set " + "/controls/flight/aileron " + aileron + "\r\n";
-                SendMessagesToSim(msg);
+                SendJoystickMessagesToSim(msg);
             }
             get
             {
@@ -148,12 +160,13 @@ namespace FlightSimulator.ViewModels
             {
                 elevator = value;
                 string msg = "set " + "/controls/flight/elevator " + elevator + "\r\n";
-                SendMessagesToSim(msg);
+                SendJoystickMessagesToSim(msg);
             }
             get
             {
                 return elevator;
             }
         }
+        #endregion
     }
 }

@@ -36,16 +36,14 @@ namespace FlightSimulator.ViewModels
                 return _PanelConnectCommand ?? (_PanelConnectCommand = new CommandHandler(()=> PanelConnect()));
             }
         }
-        private void PanelConnect()
+        private void PanelConnectThread()
         {
-            //TODO Loading screen?
-
             // Get server and client instances.
             DataWriterClient client = DataWriterClient.Instance;
             DataReaderServer server = DataReaderServer.Instance;
 
             // Get connection's settings.
-            int flightInfoPort    = ApplicationSettingsModel.Instance.FlightInfoPort;
+            int flightInfoPort = ApplicationSettingsModel.Instance.FlightInfoPort;
             int flightCommandPort = ApplicationSettingsModel.Instance.FlightCommandPort;
             string FlightServerIP = ApplicationSettingsModel.Instance.FlightServerIP;
 
@@ -55,7 +53,7 @@ namespace FlightSimulator.ViewModels
 
             // TODO If connected check if it's for the same IPEndPoint.
 
-            #region Server
+            #region Connect to Server
             // If already connected to this client, don't do anything.
             if (!server.isConnectedToEndPoint(FlightServerIP, flightInfoPort))
             {
@@ -74,7 +72,7 @@ namespace FlightSimulator.ViewModels
             }
 
             #endregion
-            #region Client
+            #region Connect to Client
             if (!client.isConnectedToEndPoint(FlightServerIP, flightCommandPort))
             {
                 // Wait for server to open
@@ -91,6 +89,12 @@ namespace FlightSimulator.ViewModels
                 client.StartClient(FlightServerIP, flightCommandPort);
             }
             #endregion
+        }
+        private void PanelConnect()
+        {
+            // Connect using a diffrent thread, so UI wont freeze.
+            Thread serverThread = new Thread(new ThreadStart(PanelConnectThread));
+            serverThread.Start();
         }
 
     }

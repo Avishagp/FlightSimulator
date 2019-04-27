@@ -94,6 +94,7 @@ namespace FlightSimulator.ViewModels
                 NotifyPropertyChanged("Color");
             }
         }
+        #endregion
 
         public double throttle;
         public double ThrottleVal

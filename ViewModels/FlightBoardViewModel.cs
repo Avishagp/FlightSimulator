@@ -10,14 +10,49 @@ namespace FlightSimulator.ViewModels
     public class FlightBoardViewModel : BaseNotify
     {
 
-        public double Lon
+        public FlightBoardViewModel()
         {
-            get;
+            Model.SymbolTable.Instance.mapUpdatedEvent += OnNewData;
         }
 
+        public void OnNewData(string key, double value)
+        {
+            if (key.Equals("/position/longitude-deg"))
+            {
+                Lon = value;
+            }
+            else if (key.Equals("/position/latitude-deg"))
+            {
+                Lat = value;
+            }
+        }
+
+        private double lon;
+        public double Lon
+        {
+            get
+            {
+                return lon;
+            }
+            set
+            {
+                lon = value;
+                NotifyPropertyChanged("Lon");
+            }
+        }
+
+        private double lat;
         public double Lat
         {
-            get;
+            get
+            {
+                return lat;
+            }
+            set
+            {
+                lat = value;
+                NotifyPropertyChanged("Lat");
+            }
         }
     }
 }

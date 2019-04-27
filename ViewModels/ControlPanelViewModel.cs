@@ -7,25 +7,31 @@ using System.Windows.Input;
 using System.ComponentModel;
 using System.Threading;
 using FlightSimulator.Model;
+using System.Windows;
 
 namespace FlightSimulator.ViewModels
 {
-    class ControlPanelViewModel : INotifyPropertyChanged
+    class ControlPanelViewModel : BaseNotify
     {
-        private bool autoTextBoxChanged = false;
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string property)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
 
         public void SendMessagesToSim(object parameter, bool fromTextBox = false)
         {
             autoTextBoxChanged = true;
+            // If there isn't a conenction active, abort.
+            if (!Model.DataWriterClient.Instance.isConnected)
+            {
+                MessageBox.Show("Can't send commands, there isn't a connection available", 
+                    "Warning", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                return;
+            }
+            
             if (fromTextBox)
             {
+            	// Set color
                 Color = "White";
             }
+
+            // Send commands.
             Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
             send_to_sim.Start(parameter);
         }
@@ -51,8 +57,6 @@ namespace FlightSimulator.ViewModels
                 return _autoPilotClearCommand ?? (_autoPilotClearCommand = new CommandHandler(() => ClearTextBox()));
             }
         }
-
-        
         
         public string textBox;
         public string TextBox1

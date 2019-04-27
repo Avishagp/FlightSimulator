@@ -4,7 +4,7 @@
 winexe
 C#
 .cs
-C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\obj\x64\Debug\
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\obj\x64\Debug\
 FlightSimulator
 none
 false
@@ -14,7 +14,12 @@ C:\Users\avish\Projects\GitHub\FlightSimulator\FlightSimulator\App.xaml
 1288074171
 24-655806048
 16836398389
+C:\Users\Aviad-PC\source\repos\Avishagp\FlightSimulator\App.xaml
+7-803494068
+1288074171
+25342926900
+16146302331
 MainWindow.xaml;Views\ControlPanel.xaml;Views\FlightBoard.xaml;Views\FlightPanel.xaml;Views\Joystick.xaml;Views\ucSpinnerDotCircle.xaml;Views\Windows\SettingsWindow.xaml;
 
-False
+True
 

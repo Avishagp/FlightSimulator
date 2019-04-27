@@ -72,7 +72,7 @@ namespace FlightSimulator.ViewModels.Windows
         {
             e.Cancel = true;
             ((FlightSimulator.Views.Windows.SettingsWindow)sender).Hide();
-            OnCancel();
+            //OnCancel();
         }
 
         #region Commands

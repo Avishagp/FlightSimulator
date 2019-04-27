@@ -13,7 +13,11 @@ namespace FlightSimulator.ViewModels
 {
     class ControlPanelViewModel : BaseNotify
     {
-
+        #region Send Command
+        /// <summary>
+        /// Sends the lines in the TextBox to the server.
+        /// </summary>
+        /// <param name="parameter">The string to send.</param>
         public void SendMessagesToSim(object parameter)
         {
             // If there isn't a conenction active, abort.
@@ -29,6 +33,7 @@ namespace FlightSimulator.ViewModels
             Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));
             send_to_sim.Start(parameter);
         }
+
         public ICommand _autoPilotOKCommand;
         public ICommand autoPilotOKCommand
         {
@@ -37,7 +42,9 @@ namespace FlightSimulator.ViewModels
                 return _autoPilotOKCommand ?? (_autoPilotOKCommand = new CommandHandler(() => SendMessagesToSim(textBox)));
             }
         }
-        
+        #endregion
+
+        #region Clear Command
         public void ClearTextBox()
         {
              TextBox1 = string.Empty;
@@ -50,7 +57,9 @@ namespace FlightSimulator.ViewModels
                 return _autoPilotClearCommand ?? (_autoPilotClearCommand = new CommandHandler(() => ClearTextBox()));
             }
         }
-        
+        #endregion
+
+        #region TextBox
         public string textBox;
         public string TextBox1
         {
@@ -66,7 +75,9 @@ namespace FlightSimulator.ViewModels
                 NotifyPropertyChanged("TextBox1");
             }
         }
+        #endregion
 
+        #region Color
         public string color;
         public string Color
         {
@@ -84,5 +95,6 @@ namespace FlightSimulator.ViewModels
                 NotifyPropertyChanged("Color");
             }
         }
+        #endregion
     }
 }

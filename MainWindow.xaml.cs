@@ -22,7 +22,6 @@ namespace FlightSimulator
         public MainWindow()
         {
             InitializeComponent();
-
             ViewModels.MainWindowsViewModel viewModel = new ViewModels.MainWindowsViewModel();
             DataContext = viewModel;
             // Sign the view model to Closing event.

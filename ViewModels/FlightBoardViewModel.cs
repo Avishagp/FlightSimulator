@@ -15,6 +15,11 @@ namespace FlightSimulator.ViewModels
             Model.SymbolTable.Instance.mapUpdatedEvent += OnNewData;
         }
 
+        /// <summary>
+        /// Upon SymbolTable value change, Check if its lon/lat and if so raise event.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void OnNewData(string key, double value)
         {
             if (key.Equals("/position/longitude-deg"))

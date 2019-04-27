@@ -68,6 +68,7 @@ namespace FlightSimulator.ViewModels
                     }
                 }
                 Thread serverThread = new Thread(new ParameterizedThreadStart(server.StartServer));
+                //serverThread.IsBackground = true;
                 serverThread.Start(new Tuple<string, int>(FlightServerIP, flightInfoPort));
             }
 
@@ -88,6 +89,9 @@ namespace FlightSimulator.ViewModels
                 // Start client.
                 client.StartClient(FlightServerIP, flightCommandPort);
             }
+            // Play Beep when connections are available.
+            System.Media.SystemSounds.Beep.Play();
+            return;
             #endregion
         }
         private void PanelConnect()

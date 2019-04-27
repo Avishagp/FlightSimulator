@@ -28,6 +28,11 @@ namespace FlightSimulator.ViewModels
                 return;
             }
 
+            if (string.IsNullOrEmpty((string)parameter))
+            {
+                return;
+            }
+
             // Set color and send commands.
             Color = "White";
             Thread send_to_sim = new Thread(new ParameterizedThreadStart(DataWriterClient.Instance.SendMassages));

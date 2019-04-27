@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace FlightSimulator.Model
 {
@@ -55,7 +56,7 @@ namespace FlightSimulator.Model
             int port = args.Item2;
 
             string data = null;
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[2048];
 
             // Try to stablish the remote endpoint for the socket.
             IPEndPoint iPEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
@@ -72,6 +73,7 @@ namespace FlightSimulator.Model
             // Create a TCP/IP  socket.
             tcpListener.Start();
             Socket listener = tcpListener.AcceptSocket();
+            listener.ReceiveTimeout = 1000;
 
             // Bind the socket to the local endpoint and   
             // listen for incoming connections.  
@@ -82,14 +84,23 @@ namespace FlightSimulator.Model
                 data = null;
                 current_TcpLisner = tcpListener;
                 clientEndPoint = iPEndPoint;
+                int bytesRec = 0;
                 // Start listening for connections.  
                 while (!stopServer)
                 {
 
-                    /* Save our read data in a string. */
-                    int bytesRec = listener.Receive(buffer);
+                    // Try for one second to read data from client, if no data received - skip iteration.
+                    try
+                    {
+                        /* Save our read data in a string. */
+                        bytesRec = listener.Receive(buffer);
+                    }
+                    catch (SocketException e)
+                    {
+                        continue;
+                    }
+                    
                     data += Encoding.ASCII.GetString(buffer, 0, bytesRec);
-                    //Console.WriteLine("Recieved: {0}", Encoding.Default.GetString(buffer));
 
                     /* Check if this is a full set of data. */
                     if (data.Contains('\n'))
@@ -134,7 +145,7 @@ namespace FlightSimulator.Model
 
             // Split the string to values
             string[] split = str.Split(',');
-            double[] values = new double[23];
+            double[] values = new double[25];
 
             for (int i = 0; i < split.Length; i++)
             {
@@ -142,29 +153,31 @@ namespace FlightSimulator.Model
             }
 
             /* Update the map. */
-            table.setValueOf("/instrumentation/airspeed-indicator/indicated-speed-kt", values[0]);
-            table.setValueOf("/instrumentation/altimeter/indicated-altitude-ft", values[1]);
-            table.setValueOf("/instrumentation/altimeter/pressure-alt-ft", values[2]);
-            table.setValueOf("/instrumentation/attitude-indicator/indicated-pitch-deg", values[3]);
-            table.setValueOf("/instrumentation/attitude-indicator/indicated-roll-deg", values[4]);
-            table.setValueOf("/instrumentation/attitude-indicator/internal-pitch-deg", values[5]);
-            table.setValueOf("/instrumentation/attitude-indicator/internal-roll-deg", values[6]);
-            table.setValueOf("/instrumentation/encoder/indicated-altitude-ft", values[7]);
-            table.setValueOf("/instrumentation/encoder/pressure-alt-ft", values[8]);
-            table.setValueOf("/instrumentation/gps/indicated-altitude-ft", values[9]);
-            table.setValueOf("/instrumentation/gps/indicated-ground-speed-kt", values[10]);
-            table.setValueOf("/instrumentation/gps/indicated-vertical-speed", values[11]);
-            table.setValueOf("/instrumentation/heading-indicator/indicated-heading-deg", values[12]);
-            table.setValueOf("/instrumentation/magnetic-compass/indicated-heading-deg", values[13]);
-            table.setValueOf("/instrumentation/slip-skid-ball/indicated-slip-skid", values[14]);
-            table.setValueOf("/instrumentation/turn-indicator/indicated-turn-rate", values[15]);
-            table.setValueOf("/instrumentation/vertical-speed-indicator/indicated-speed-fpm", values[16]);
-            table.setValueOf("/controls/flight/aileron", values[17]);
-            table.setValueOf("/controls/flight/elevator", values[18]);
-            table.setValueOf("/controls/flight/rudder", values[19]);
-            table.setValueOf("/controls/flight/flaps", values[20]);
-            table.setValueOf("/controls/engines/current-engine/throttle", values[21]);
-            table.setValueOf("/engines/engine/rpm", values[22]);
+            table.setValueOf("/position/longitude-deg", values[0]);
+            table.setValueOf("/position/latitude-deg", values[1]);
+            table.setValueOf("/instrumentation/airspeed-indicator/indicated-speed-kt", values[2]);
+            table.setValueOf("/instrumentation/altimeter/indicated-altitude-ft", values[3]);
+            table.setValueOf("/instrumentation/altimeter/pressure-alt-ft", values[4]);
+            table.setValueOf("/instrumentation/attitude-indicator/indicated-pitch-deg", values[5]);
+            table.setValueOf("/instrumentation/attitude-indicator/indicated-roll-deg", values[6]);
+            table.setValueOf("/instrumentation/attitude-indicator/internal-pitch-deg", values[7]);
+            table.setValueOf("/instrumentation/attitude-indicator/internal-roll-deg", values[8]);
+            table.setValueOf("/instrumentation/encoder/indicated-altitude-ft", values[9]);
+            table.setValueOf("/instrumentation/encoder/pressure-alt-ft", values[10]);
+            table.setValueOf("/instrumentation/gps/indicated-altitude-ft", values[11]);
+            table.setValueOf("/instrumentation/gps/indicated-ground-speed-kt", values[12]);
+            table.setValueOf("/instrumentation/gps/indicated-vertical-speed", values[13]);
+            table.setValueOf("/instrumentation/heading-indicator/indicated-heading-deg", values[14]);
+            table.setValueOf("/instrumentation/magnetic-compass/indicated-heading-deg", values[15]);
+            table.setValueOf("/instrumentation/slip-skid-ball/indicated-slip-skid", values[16]);
+            table.setValueOf("/instrumentation/turn-indicator/indicated-turn-rate", values[17]);
+            table.setValueOf("/instrumentation/vertical-speed-indicator/indicated-speed-fpm", values[18]);
+            table.setValueOf("/controls/flight/aileron", values[19]);
+            table.setValueOf("/controls/flight/elevator", values[20]);
+            table.setValueOf("/controls/flight/rudder", values[21]);
+            table.setValueOf("/controls/flight/flaps", values[22]);
+            table.setValueOf("/controls/engines/current-engine/throttle", values[23]);
+            table.setValueOf("/engines/engine/rpm", values[24]);
 
             /*
             * Console.Clear();

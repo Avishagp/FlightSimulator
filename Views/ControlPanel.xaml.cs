@@ -26,6 +26,5 @@ namespace FlightSimulator.Views
             InitializeComponent();
             DataContext = new ControlPanelViewModel();
         }
-       
     }
 }

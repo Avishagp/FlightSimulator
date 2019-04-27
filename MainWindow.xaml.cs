@@ -22,7 +22,11 @@ namespace FlightSimulator
         public MainWindow()
         {
             InitializeComponent();
-            //TODO when closing, clsoe settings windows if open.
+
+            ViewModels.MainWindowsViewModel viewModel = new ViewModels.MainWindowsViewModel();
+            DataContext = viewModel;
+            // Sign the view model to Closing event.
+            Closing += viewModel.OnWindowClosing;
         }
     }
 }

@@ -8,6 +8,7 @@
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="500" VerticalAlignment="Top" Width="500">
             <TabItem Header="Manual" FontWeight="Bold">
+                
                 <Grid Background="#FFE5E5E5">
                     <local:Joystick HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Joystick"
                                     Aileron="{Binding Aileron, Mode=OneWayToSource}" Elevator="{Binding Elevator, Mode=OneWayToSource}"/>
@@ -81,6 +82,9 @@
 
                 </Grid>
             </TabItem>
+            
+            
+            
             <TabItem Header="Autopilot" FontWeight="Bold">
                 <Grid Background="#FFE5E5E5">
                     <Button Command="{Binding autoPilotOKCommand}" Content="OK" HorizontalAlignment="Left" Margin="150,440,0,0" VerticalAlignment="Top" Width="50"

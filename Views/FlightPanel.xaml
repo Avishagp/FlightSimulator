@@ -5,12 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" >
-    <Grid Height="500" Width="500" Background="WhiteSmoke">
-        <local:FlightBoard HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Bottom" Height="450" Width="450"
-                           Background="WhiteSmoke"/>
-        <Button Content="Connect" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold"
-                Background="Snow" Command="{Binding Path=PanelConnectCommand}"/>
-        <Button Content="Settings" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold"
-                Background="Snow" Command="{Binding Path=PanelSettingsCommand}"/>
-    </Grid>
+
+
+    <StackPanel Height="500" Width="500" Background="WhiteSmoke" TextBlock.FontSize="14">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Connect" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold"
+                Background="Snow" Command="{Binding Path=PanelConnectCommand}" Grid.Column="0" />
+
+            <Button Content="Settings" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold"
+                Background="Snow" Command="{Binding Path=PanelSettingsCommand}" Grid.Column="1"/>
+
+        </Grid>
+        <local:FlightBoard Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="450" Width="500" Background="WhiteSmoke" Margin="0,20,0,0"/>
+    </StackPanel>
 </UserControl>

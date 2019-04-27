@@ -11,10 +11,8 @@ using System.Threading;
 
 namespace FlightSimulator.ViewModels
 {
-    class FlightPanelViewModel : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
+    class FlightPanelViewModel : BaseNotify
+    { 
         private SettingsWindow settings = new SettingsWindow();
 
         private ICommand _PanelSettingsCommand;

@@ -6,11 +6,14 @@
         xmlns:local="clr-namespace:FlightSimulator"
         xmlns:Views="clr-namespace:FlightSimulator.Views" x:Class="FlightSimulator.MainWindow"
         mc:Ignorable="d"
-        Title="FlightSimulator" Height="600" Width="1000"
-        ResizeMode="NoResize">
+        Title="Flight Simulator" Height="585" Width="1000"
+        ResizeMode="NoResize"
+        Background ="SkyBlue">
     <Grid>
-        <Views:FlightPanel HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top"/>
-        <Views:ControlPanel HorizontalAlignment="Left" Margin="505,60,0,0" VerticalAlignment="Top"/>
-        <Label Content="Flight Simulator" HorizontalAlignment="Left" Margin="344,2,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="32"/>
+        <Label Content="Flight Simulator" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="UltraBlack" FontSize="32"/>
+        <StackPanel Orientation="Horizontal">
+            <Views:FlightPanel HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <Views:ControlPanel HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        </StackPanel>
     </Grid>
 </Window>
